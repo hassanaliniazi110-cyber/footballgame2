@@ -3,25 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Dodge</title>
+    <title>Neon Cyber Pong 2077</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Importing a retro pixel font for extra flair -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<samp
-        <canvas id="gameCanvas"></canvas>
-        <div id="ui-layer">
-            <div id="score">Score: <span id="scoreValue">0</span></div>
-            <div id="gameOverScreen" class="hidden">
-                <h1>GAME OVER</h1>
-                <p>Final Score: <span id="finalScore">0</span></p>
-                <button id="restartBtn">Play Again</button>
+<body>
+
+    <!-- Preloader / Loading Screen -->
+    <div id="preloader" class="screen-overlay">
+        <div class="animated-banner">NEON PONG</div>
+        <div id="loading-text">INITIALIZING SYSTEMS...</div>
+        <div id="loading-bar">
+            <div id="loading-progress"></div>
+        </div>
+        <p style="margin-top: 15px; font-size: 14px; color: #888;">Loading assets... <span id="load-percentage">0</span>%</p>
+    </div>
+
+    <!-- Main Game Container -->
+    <div id="game-container">
+        
+        <!-- Canvas Layer -->
+        <canvas id="game-canvas" width="1280" height="720"></canvas>
+
+        <!-- Canvas Wrapper for Cursor Hiding -->
+        <div id="canvas-wrapper">
+
+            <!-- UI Layer -->
+            <div id="ui-layer">
+                
+                <!-- Top HUD: Score and Timer -->
+                <div class="hud-top">
+                    <div class="scoreboard">
+                        <div class="score-box">
+                            <span class="score-label">PLAYER</span>
+                            <span id="player-score" class="score-value">0</span>
+                        </div>
+                        <div class="timer-container">
+                            <span id="game-timer" class="timer">00:00</span>
+                        </div>
+                        <div class="score-box">
+                            <span class="score-label">AI</span>
+                            <span id="ai-score" class="score-value">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Settings & Controls Icons -->
+                    <div class="controls-hud">
+                        <button id="sound-toggle" class="control-btn" aria-label="Toggle Sound">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <button id="fullscreen-toggle" class="control-btn" aria-label="Toggle Fullscreen">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                        </button>
+                        <button id="settings-toggle" class="control-btn" aria-label="Settings">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Center Screen: Menus -->
+                <div id="center-screen">
+                    <h1 id="screen-title" class="text-shadow-glow">NEON PONG 2077</h1>
+                    <p class="subtitle">The Ultimate Cyber-Arcade Experience</p>
+                    
+                    <div id="instructions" class="menu-section">
+                        <h3>How to Play</h3>
+                        <ul>
+                            <li><strong>Move:</strong> Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>Arrow Keys</kbd></li>
+                            <li><strong>Boost Speed:</strong> Hold <kbd>Shift</kbd></li>
+                            <li><strong>Score Goals:</strong> Hit the ball past the AI (Red)</li>
+                        </ul>
+                    </div>
+                    
+                    <button id="start-btn" class="game-btn primary-btn">INITIALIZE MATCH</button>
+                    
+                    <div id="game-over-screen" class="hidden">
+                        <h2 id="winner-text" class="text-shadow-glow">PLAYER WINS!</h2>
+                        <p>Final Score: <span id="final-score">0 - 0</span></p>
+                        <button id="restart-btn" class="game-btn secondary-btn">PLAY AGAIN</button>
+                    </div>
+                </div>
+
+                <!-- Bottom HUD: Stats -->
+                <div class="hud-bottom">
+                    <div class="stats-panel">
+                        <div class="stat-box">
+                            <span class="stat-label">FPS</span>
+                            <span id="fps-counter" class="stat-value">60</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">DIFFICULTY</span>
+                            <span id="difficulty-level" class="stat-value">NORMAL</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="startScreen">
-                <h1>Neon Dodge</h1>
-                <p>Use Left/Right Arrows or A/D to move.</p>
-                <button id="startBtn">Start Game</button>
+            
+            <!-- Settings Modal (Hidden by default) -->
+            <div id="settings-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>SYSTEM SETTINGS</h3>
+                        <button id="close-settings" class="close-btn">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="setting-row">
+                            <label>Ball Speed</label>
+                            <input type="range" id="ball-speed-slider" min="1" max="10" value="5">
+                        </div>
+                        <div class="setting-row">
+                            <label>AI Difficulty</label>
+                            <select id="ai-difficulty-select">
+                                <option value="easy">Easy</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="hard">Hard</option>
+                                <option value="impossible">Impossible</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label>Visual Effects</label>
+                            <input type="checkbox" id="visual-effects-check" checked>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Sound Toggle Modal -->
+            <div id="sound-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>AUDIO CONTROL</h3>
+                        <button id="close-sound" class="close-btn">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="setting-row">
+                            <label>Master Volume</label>
+                            <input type="range" id="master-volume-slider" min="0" max="100" value="50">
+                        </div>
+                        <div class="setting-row">
+                            <label>Sound Effects</label>
+                            <input type="checkbox" id="sfx-check" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overlay for Paused State -->
+            <div id="pause-overlay" class="hidden">
+                <h2>PAUSED</h2>
+                <p>Press ESC to Resume</p>
+                <button id="resume-btn" class="game-btn">RESUME</button>
+                <button id="quit-btn" class="game-btn danger-btn">QUIT GAME</button>
+            </div>
+
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+        <p>&copy; 2077 NEON PONG SYSTEMS. ALL RIGHTS RESERVED.</p>
+        <p>Version: 1.0.4 | Build: 10032026.1217</p>
+    </footer>
+
     <script src="game.js"></script>
 </body>
 </html>
