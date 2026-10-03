@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border: 2px solid #00d2ff;
+    background-color: #000;
+}
+
+canvas {
+    display: block;
+    background-color: #0a0a0a;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Let clicks pass through to canvas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00d2ff;
+    text-shadow: 0 0 5px #00d2ff;
+}
+
+#startScreen, #gameOverScreen {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.85);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #00d2ff;
+    text-shadow: 0 0 10px #00d2ff;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+button {
+    background-color: #00d2ff;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+button:hover {
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+#finalScore {
+    color: #ff0055;
+    font-weight: bold;
+}
