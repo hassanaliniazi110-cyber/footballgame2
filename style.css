@@ -1594,7 +1594,7 @@ body.eclipse-edition {
   box-shadow: 0 0 0 1px rgba(196,132,252,.20), 0 0 45px rgba(124,58,237,.12);
 }
 .eclipse-edition .main-layout {
-  grid-template-columns: minmax(245px, 285px) minmax(0, 1fr) minmax(215px, 260px);
+  grid-template-columns: minmax(235px, 285px) minmax(0, 1fr);
   gap: 20px;
   max-width: 1680px;
   padding: 24px;
