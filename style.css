@@ -1762,3 +1762,42 @@ body.eclipse-edition {
   .top-stat span { font-size:8px; }
   .top-stat strong { font-size:15px; }
 }
+
+
+/* =========================================================
+   SIDEBAR SCROLL FIX — FOOTBALLGAME2 ONLY
+   Keep the mode sidebar visible while the desktop/tablet page scrolls.
+   On narrow screens it returns to normal flow so it doesn't cover content.
+   ========================================================= */
+@media (min-width: 761px) {
+  .eclipse-dashboard {
+    align-items: start;
+  }
+
+  .eclipse-dashboard .mode-rail {
+    position: sticky;
+    top: 94px;
+    align-self: start;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+
+  .eclipse-dashboard .mode-rail::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .eclipse-dashboard .mode-rail::-webkit-scrollbar-thumb {
+    background: rgba(181, 255, 109, .28);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  .eclipse-dashboard .mode-rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
