@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Football Hero X — Eclipse Edition</title>
+    <title>ECLIPSE ARENA — Football Hero X</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,7 +18,7 @@
         <div class="brand">
             <div class="brand-ball">⚽</div>
             <div>
-                <h1>FOOTBALL HERO X <span class="edition-mark">ECLIPSE</span></h1>
+                <h1>ECLIPSE <span class="edition-mark">ARENA</span></h1>
                 <p>ULTIMATE FOOTBALL CHALLENGE</p>
             </div>
         </div>
@@ -52,13 +52,10 @@
 
     <!-- ================= MAIN LAYOUT ================= -->
 
-    <main class="main-layout">
-
-        <!-- ================= SIDEBAR ================= -->
-
-        <aside class="sidebar">
-
-            <section class="panel">
+    <main class="eclipse-dashboard">
+  <nav class="mode-rail">
+    <div class="rail-heading"><span class="rail-orb">✦</span><span>PLAY</span></div>
+    <section class="panel">
 
                 <div class="panel-title">
                     <span>🎮</span>
@@ -102,9 +99,203 @@
                 </div>
 
             </section>
+    <div class="rail-tip"><span>PRO TIP</span><p>Read the keeper. Pick your corner. Own the moment.</p></div>
+  </nav>
+  <section class="match-column">
+    <div class="match-heading">
+      <div><p class="eyebrow">ECLIPSE ARENA / LIVE SESSION</p><h2>Own the <em>moment.</em></h2><p class="match-subtitle">Train your instincts. Build your streak. Become the hero.</p></div>
+      <div class="live-pill"><i></i> MATCH READY</div>
+    </div>
+    <section class="game-area">
+
+            <div class="game-hud">
+
+                <div class="hud-item">
+                    <span>MODE</span>
+                    <strong id="modeDisplay">PENALTY</strong>
+                </div>
+
+                <div class="hud-item">
+                    <span>DISTANCE</span>
+                    <strong id="distanceDisplay">12 YDS</strong>
+                </div>
+
+                <div class="hud-item">
+                    <span>WIND</span>
+                    <strong id="windDisplay">0 km/h</strong>
+                </div>
+
+                <div class="hud-item">
+                    <span>COMBO</span>
+                    <strong id="comboDisplay">x0</strong>
+                </div>
+
+            </div>
 
 
-            <section class="panel">
+            <div class="canvas-wrapper">
+
+                <canvas id="gameCanvas"></canvas>
+
+
+                <!-- START OVERLAY -->
+
+                <div id="startOverlay" class="game-overlay">
+
+                    <div class="overlay-card">
+
+                        <div class="big-ball">⚽</div>
+
+                        <h2 id="controlTitle">PENALTY SHOOTOUT</h2>
+
+                        <p id="controlDescription">
+                            Aim at the goal and shoot past the goalkeeper.
+                        </p>
+
+                        <div class="start-info">
+
+                            <div>
+                                <span>PLAYER</span>
+                                <strong id="startPlayer">Hassan Ali</strong>
+                            </div>
+
+                            <div>
+                                <span>KEEPER</span>
+                                <strong id="startKeeper">Hassan Ali</strong>
+                            </div>
+
+                            <div>
+                                <span>MODE</span>
+                                <strong id="startMode">Penalty</strong>
+                            </div>
+
+                        </div>
+
+                        <button id="startButton" class="primary-button">
+                            START MATCH
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT OVERLAY -->
+
+                <div id="resultOverlay" class="game-overlay hidden">
+
+                    <div class="overlay-card result-card">
+
+                        <div id="resultIcon" class="result-icon">⚽</div>
+
+                        <h2 id="resultTitle">GOAL!</h2>
+
+                        <p id="resultMessage">
+                            Perfect finish!
+                        </p>
+
+                        <div class="result-score">
+
+                            <div>
+                                <span>SCORE</span>
+                                <strong id="resultScore">100</strong>
+                            </div>
+
+                            <div>
+                                <span>COMBO</span>
+                                <strong id="resultCombo">x1</strong>
+                            </div>
+
+                        </div>
+
+                        <button id="nextButton" class="primary-button">
+                            NEXT SHOT
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= CONTROLS ================= -->
+
+            <div class="controls">
+
+                <div class="control-help">
+
+                    <div class="help-item">
+                        <kbd>←</kbd>
+                        <kbd>↑</kbd>
+                        <kbd>↓</kbd>
+                        <kbd>→</kbd>
+                        <span>AIM</span>
+                    </div>
+
+                    <div class="help-item">
+                        <kbd>SPACE</kbd>
+                        <span id="spaceLabel">SHOOT</span>
+                    </div>
+
+                </div>
+
+                <button id="shootButton" class="shoot-button">
+                    ⚽ SHOOT
+                </button>
+
+                <button id="saveButton" class="save-button hidden">
+                    🧤 SAVE
+                </button>
+
+            </div>
+
+
+            <!-- ================= BOTTOM INFO ================= -->
+
+            <div class="bottom-info">
+
+                <div class="info-card">
+
+                    <div class="mini-avatar" id="bottomPlayer">HA</div>
+
+                    <div>
+                        <small>PLAYER</small>
+                        <strong id="playerNameBottom">Hassan Ali</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="special-card">
+
+                    <span>⭐ SPECIAL</span>
+
+                    <strong id="bottomSpecial">
+                        Complete Specialist
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="mini-avatar keeper-mini" id="bottomKeeper">HA</div>
+
+                    <div>
+                        <small>GOALKEEPER</small>
+                        <strong id="keeperNameBottom">Hassan Ali</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+  </section>
+  <aside class="command-column">
+    <div class="command-heading"><span>01 / LOADOUT</span><h3>Match setup</h3><p>Fine-tune your squad before kickoff.</p></div>
+    <section class="panel">
 
                 <div class="panel-title">
                     <span>👟</span>
@@ -310,200 +501,8 @@
             <button id="restartButton" class="restart-button">
                 ↻ RESTART GAME
             </button>
-
-        </aside>
-
-
-        <!-- ================= GAME ================= -->
-
-        <section class="game-area">
-
-            <div class="game-hud">
-
-                <div class="hud-item">
-                    <span>MODE</span>
-                    <strong id="modeDisplay">PENALTY</strong>
-                </div>
-
-                <div class="hud-item">
-                    <span>DISTANCE</span>
-                    <strong id="distanceDisplay">12 YDS</strong>
-                </div>
-
-                <div class="hud-item">
-                    <span>WIND</span>
-                    <strong id="windDisplay">0 km/h</strong>
-                </div>
-
-                <div class="hud-item">
-                    <span>COMBO</span>
-                    <strong id="comboDisplay">x0</strong>
-                </div>
-
-            </div>
-
-
-            <div class="canvas-wrapper">
-
-                <canvas id="gameCanvas"></canvas>
-
-
-                <!-- START OVERLAY -->
-
-                <div id="startOverlay" class="game-overlay">
-
-                    <div class="overlay-card">
-
-                        <div class="big-ball">⚽</div>
-
-                        <h2 id="controlTitle">PENALTY SHOOTOUT</h2>
-
-                        <p id="controlDescription">
-                            Aim at the goal and shoot past the goalkeeper.
-                        </p>
-
-                        <div class="start-info">
-
-                            <div>
-                                <span>PLAYER</span>
-                                <strong id="startPlayer">Hassan Ali</strong>
-                            </div>
-
-                            <div>
-                                <span>KEEPER</span>
-                                <strong id="startKeeper">Hassan Ali</strong>
-                            </div>
-
-                            <div>
-                                <span>MODE</span>
-                                <strong id="startMode">Penalty</strong>
-                            </div>
-
-                        </div>
-
-                        <button id="startButton" class="primary-button">
-                            START MATCH
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- RESULT OVERLAY -->
-
-                <div id="resultOverlay" class="game-overlay hidden">
-
-                    <div class="overlay-card result-card">
-
-                        <div id="resultIcon" class="result-icon">⚽</div>
-
-                        <h2 id="resultTitle">GOAL!</h2>
-
-                        <p id="resultMessage">
-                            Perfect finish!
-                        </p>
-
-                        <div class="result-score">
-
-                            <div>
-                                <span>SCORE</span>
-                                <strong id="resultScore">100</strong>
-                            </div>
-
-                            <div>
-                                <span>COMBO</span>
-                                <strong id="resultCombo">x1</strong>
-                            </div>
-
-                        </div>
-
-                        <button id="nextButton" class="primary-button">
-                            NEXT SHOT
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ================= CONTROLS ================= -->
-
-            <div class="controls">
-
-                <div class="control-help">
-
-                    <div class="help-item">
-                        <kbd>←</kbd>
-                        <kbd>↑</kbd>
-                        <kbd>↓</kbd>
-                        <kbd>→</kbd>
-                        <span>AIM</span>
-                    </div>
-
-                    <div class="help-item">
-                        <kbd>SPACE</kbd>
-                        <span id="spaceLabel">SHOOT</span>
-                    </div>
-
-                </div>
-
-                <button id="shootButton" class="shoot-button">
-                    ⚽ SHOOT
-                </button>
-
-                <button id="saveButton" class="save-button hidden">
-                    🧤 SAVE
-                </button>
-
-            </div>
-
-
-            <!-- ================= BOTTOM INFO ================= -->
-
-            <div class="bottom-info">
-
-                <div class="info-card">
-
-                    <div class="mini-avatar" id="bottomPlayer">HA</div>
-
-                    <div>
-                        <small>PLAYER</small>
-                        <strong id="playerNameBottom">Hassan Ali</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="special-card">
-
-                    <span>⭐ SPECIAL</span>
-
-                    <strong id="bottomSpecial">
-                        Complete Specialist
-                    </strong>
-
-                </div>
-
-
-                <div class="info-card">
-
-                    <div class="mini-avatar keeper-mini" id="bottomKeeper">HA</div>
-
-                    <div>
-                        <small>GOALKEEPER</small>
-                        <strong id="keeperNameBottom">Hassan Ali</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
+  </aside>
+</main>
 
 </div>
 
